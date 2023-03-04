@@ -15,7 +15,19 @@ public class FileEntityConfiguration : BaseEntityConfiguration<FileEntity>
             .IsRequired()
             .HasColumnType("nvarchar(256)");
 
+        builder.Property(x => x.Size)
+            .IsRequired()
+            .HasColumnType("int");
+
         builder.Property(x => x.FileMime)
+            .IsRequired()
+            .HasColumnType("nvarchar(256)");
+
+        builder.Property(x => x.Location)
+            .IsRequired()
+            .HasColumnType("nvarchar(256)");
+
+        builder.Property(x => x.Visibility)
             .IsRequired()
             .HasColumnType("nvarchar(256)");
 
@@ -23,9 +35,6 @@ public class FileEntityConfiguration : BaseEntityConfiguration<FileEntity>
             .IsRequired()
             .HasColumnType("varbinary(Max)");
 
-        builder.Property(x => x.Size)
-            .IsRequired()
-            .HasColumnType("int");
 
 
     }

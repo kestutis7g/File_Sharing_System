@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Forum.Core.Interfaces;
-using Forum.API.Models;
 using Forum.Core.Aggregates.File.Entities;
 using Forum.Core.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +11,7 @@ using Forum.API.Auth.Model;
 using System.Net;
 using System.Net.Http.Headers;
 using static System.Net.Mime.MediaTypeNames;
+using Forum.API.Models.File;
 
 namespace Forum.API.Controllers;
 
@@ -75,26 +75,28 @@ public class FileController : BaseController
 
     // POST api/file/uploadfile
     [HttpPost("uploadfile")]
-    [Consumes("multipart/form-data")]
-    public Task<FileEntity> Save(IFormFile uploadFile)
+    //[Consumes("multipart/form-data")]
+    public Task<FileEntity> Save([FromForm] FileViewModel uploadFile)
     {
         
         //if (uploadFile.ContentType.ToLower().StartsWith("image/"))
         // Check whether the selected file is image
         //{
             byte[] b;
-            using (BinaryReader br = new BinaryReader(uploadFile.OpenReadStream()))
+            using (BinaryReader br = new BinaryReader(uploadFile.File.OpenReadStream()))
             {
-                b = br.ReadBytes((int)uploadFile.OpenReadStream().Length);
+                b = br.ReadBytes((int)uploadFile.File.OpenReadStream().Length);
                 // Convert the image in to bytes
             }
             Response.StatusCode = 200;
 
             FileModel request = new FileModel();
-            request.Name = uploadFile.FileName;
-            request.FileMime = uploadFile.ContentType;
+            request.Name = uploadFile.File.FileName;
+            request.FileMime = uploadFile.File.ContentType;
             request.FileBinary = b;
-            request.Size = Convert.ToInt32(uploadFile.Length);
+            request.Size = Convert.ToInt32(uploadFile.File.Length);
+        request.Location = uploadFile.Location;
+        request.Visibility = uploadFile.Visibility;
 
         return FileService.CreateFile(Mapper.Map<FileEntity>(request));
 

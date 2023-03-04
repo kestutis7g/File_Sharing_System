@@ -91,6 +91,10 @@ namespace Forum.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)");
+
                     b.Property<DateTimeOffset>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
@@ -103,6 +107,10 @@ namespace Forum.Infrastructure.Migrations
                     b.Property<int?>("Size")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<string>("Visibility")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -337,28 +345,28 @@ namespace Forum.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("03c91358-6ed4-4a47-a8be-056c565e0684"),
+                            Id = new Guid("848ad201-f0c1-421d-b439-6f4042f39322"),
                             Banned = false,
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(577), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2550), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             Email = "admin@admin.com",
                             Lastname = "Admin",
                             Login = "Admin",
-                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(587), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2560), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Admin",
                             Password = "Admin",
                             Role = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("7587cf30-c562-4a83-9588-7164a998516b"),
+                            Id = new Guid("ab2143db-2cc4-4af6-9410-6666a642214e"),
                             Banned = false,
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(630), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2669), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             Email = "sigitas@gmail.com",
                             Lastname = "Sigitavicius",
                             Login = "Sigitas",
-                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(630), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2670), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Sigitas",
                             Password = "Sigitas",
                             Role = "User"

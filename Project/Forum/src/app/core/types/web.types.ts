@@ -84,3 +84,9 @@ export type ChangePassword = {
   oldPassword: string;
   newPassword: string;
 };
+
+export type FileType = {
+  location: string;
+  visibility: string;
+  file: any;
+};

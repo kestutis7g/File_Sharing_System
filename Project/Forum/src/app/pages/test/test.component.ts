@@ -36,7 +36,9 @@ export class TestComponent implements OnInit {
     if (file) {
       this.fileName = file.name;
       const formData = new FormData();
-      formData.append('uploadFile', file);
+      formData.append('Location', '/test');
+      formData.append('Visibility', 'public');
+      formData.append('File', file);
 
       this.fileService.addFile(formData).subscribe({
         next: (data) => {},

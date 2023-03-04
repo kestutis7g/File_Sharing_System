@@ -15,9 +15,11 @@ namespace Forum.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    FileMime = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    FileBinary = table.Column<byte[]>(type: "varbinary(Max)", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: false),
+                    FileMime = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Visibility = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    FileBinary = table.Column<byte[]>(type: "varbinary(Max)", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSDATETIMEOFFSET()"),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSDATETIMEOFFSET()")
                 },
@@ -192,12 +194,12 @@ namespace Forum.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Banned", "CreatedAt", "Deleted", "Description", "Email", "FileMime", "Lastname", "Login", "ModifiedAt", "Name", "Password", "Phone", "ProfilePicture", "Role" },
-                values: new object[] { new Guid("03c91358-6ed4-4a47-a8be-056c565e0684"), false, new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(577), new TimeSpan(0, 0, 0, 0, 0)), false, null, "admin@admin.com", null, "Admin", "Admin", new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(587), new TimeSpan(0, 0, 0, 0, 0)), "Admin", "Admin", null, null, "Admin" });
+                values: new object[] { new Guid("848ad201-f0c1-421d-b439-6f4042f39322"), false, new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2550), new TimeSpan(0, 0, 0, 0, 0)), false, null, "admin@admin.com", null, "Admin", "Admin", new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2560), new TimeSpan(0, 0, 0, 0, 0)), "Admin", "Admin", null, null, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Banned", "CreatedAt", "Deleted", "Description", "Email", "FileMime", "Lastname", "Login", "ModifiedAt", "Name", "Password", "Phone", "ProfilePicture", "Role" },
-                values: new object[] { new Guid("7587cf30-c562-4a83-9588-7164a998516b"), false, new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(630), new TimeSpan(0, 0, 0, 0, 0)), false, null, "sigitas@gmail.com", null, "Sigitavicius", "Sigitas", new DateTimeOffset(new DateTime(2023, 3, 3, 16, 23, 5, 371, DateTimeKind.Unspecified).AddTicks(630), new TimeSpan(0, 0, 0, 0, 0)), "Sigitas", "Sigitas", null, null, "User" });
+                values: new object[] { new Guid("ab2143db-2cc4-4af6-9410-6666a642214e"), false, new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2669), new TimeSpan(0, 0, 0, 0, 0)), false, null, "sigitas@gmail.com", null, "Sigitavicius", "Sigitas", new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2670), new TimeSpan(0, 0, 0, 0, 0)), "Sigitas", "Sigitas", null, null, "User" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_ParentId",

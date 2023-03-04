@@ -33,38 +33,36 @@
 
   <br />
 
-  <a
-    href="https://localhost:7111/api/file/downloadfile/4382BB39-B261-44A5-BD00-13A45E3D3E6F"
-  >
-    Download - database
-  </a>
-
   <div>
     <h1>GIF</h1>
     <img
       style="width: 500px"
-      src="https://localhost:7111/api/file/previewfile/AB295A1C-B1F3-41B7-B395-7FB1067AE38C"
+      src="https://localhost:7111/api/file/previewfile/6D4F27C8-55BA-426F-8474-61C21CB39DFF"
     />
   </div>
 
   <div>
-    <h1>Regular image</h1>
     <img
       style="width: 500px"
-      src="https://localhost:7111/api/file/previewfile/F4543FF4-7942-4A44-8762-FF9ACE7C1CAE"
+      src="https://localhost:7111/api/file/previewfile/5518A309-02ED-4D2C-972C-FE2EC6D1464E"
     />
-  </div>
 
-  <div>
-    <h1>No download image</h1>
     <img
       oncontextmenu="return false;"
       style="width: 500px"
-      src="https://localhost:7111/api/file/previewfile/F4543FF4-7942-4A44-8762-FF9ACE7C1CAE"
+      src="https://localhost:7111/api/file/previewfile/5518A309-02ED-4D2C-972C-FE2EC6D1464E"
     />
   </div>
 
   <div class="video">
+    <video muted controls style="width: 500px">
+      <source
+        src="https://localhost:7111/api/file/previewfile/254CEC51-2EBB-4434-8013-5A7006452FED"
+        type="video/mp4"
+      />
+      Browser not supported
+    </video>
+
     <video
       muted
       controls
@@ -73,40 +71,35 @@
       style="width: 500px"
     >
       <source
-        src="https://localhost:7111/api/file/previewfile/8457B7D0-60E3-4626-A822-79E4498B4E5C"
+        src="https://localhost:7111/api/file/previewfile/254CEC51-2EBB-4434-8013-5A7006452FED"
         type="video/mp4"
       />
       Browser not supported
     </video>
   </div>
 
-  <div class="video">
-    <video muted controls style="width: 500px">
-      <source
-        src="https://localhost:7111/api/file/previewfile/8457B7D0-60E3-4626-A822-79E4498B4E5C"
-        type="video/mp4"
-      />
-      Browser not supported
-    </video>
-  </div>
-
-  <div class="video">
+  <div class="audio">
     <h1>Downloadable audio</h1>
-    <audio controls>
+    <audio controls style="width: 500px">
       <source
-        src="https://localhost:7111/api/file/previewfile/739AFEFB-2263-4293-BF86-AB14D1C79152"
+        src="https://localhost:7111/api/file/previewfile/8800BE0E-3D6F-4BF1-8A64-73CA1507569E"
         type="audio/mpeg"
       />
       Browser not supported
     </audio>
   </div>
 
-  <div class="video">
+  <div class="audio">
     <h1>Prevent download audio</h1>
 
-    <audio controls controlsList="nodownload" oncontextmenu="return false;">
+    <audio
+      controls
+      controlsList="nodownload"
+      oncontextmenu="return false;"
+      style="width: 500px"
+    >
       <source
-        src="https://localhost:7111/api/file/previewfile/739AFEFB-2263-4293-BF86-AB14D1C79152"
+        src="https://localhost:7111/api/file/previewfile/8800BE0E-3D6F-4BF1-8A64-73CA1507569E"
         type="audio/mpeg"
       />
       Browser not supported
@@ -115,14 +108,14 @@
 
   <button
     class="btn btn-success"
-    onclick=" window.open('https://localhost:7111/api/file/previewfile/AE07D6DE-FE5D-4528-B778-C451A9B642C2','_blank')"
+    onclick=" window.open('https://localhost:7111/api/file/previewfile/520E509A-571F-4A74-B3D2-AF1549E32795','_blank')"
   >
     Preview pdf
   </button>
 
   <button
     class="btn btn-warning"
-    onclick=" window.open('https://localhost:7111/api/file/downloadfile/AE07D6DE-FE5D-4528-B778-C451A9B642C2','_blank')"
+    onclick=" window.open('https://localhost:7111/api/file/downloadfile/520E509A-571F-4A74-B3D2-AF1549E32795','_blank')"
   >
     Download pdf
   </button>
