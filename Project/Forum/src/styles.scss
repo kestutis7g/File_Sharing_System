@@ -1,0 +1,140 @@
+@import "~bootstrap";
+
+.gradient-default {
+  background: var(--gradient-default);
+  color: var(--font-color);
+  border: 0;
+}
+.gradient-primary {
+  background: var(--gradient-primary);
+  color: var(--font-color);
+  border: 0;
+}
+.gradient-secondary {
+  background: var(--gradient-secondary);
+  color: var(--font-color);
+  border: 0;
+}
+.gradient-info {
+  background: var(--gradient-info);
+  color: var(--font-color);
+  border: 0;
+}
+.gradient-success {
+  background: var(--gradient-success);
+  color: var(--font-color);
+  border: 0;
+}
+.gradient-danger {
+  background: var(--gradient-danger);
+  color: var(--font-color);
+  border: 0;
+}
+.gradient-warning {
+  background: var(--gradient-warning);
+  color: var(--font-color);
+  border: 0;
+}
+
+.test {
+  color: #8e8e8e;
+}
+
+html,
+body {
+  background: var(--body-background);
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+}
+
+footer {
+  background: var(--main-background);
+  color: var(--main-font-color);
+  text-align: center;
+}
+
+.main {
+  background: var(--main-background);
+  color: var(--main-font-color);
+}
+.main-text {
+  color: var(--main-font-color);
+}
+.secondary-text {
+  color: var(--secondary-font-color);
+}
+
+.form-control,
+.form-control:focus {
+  background: var(--secondary-background);
+  color: var(--main-font-color);
+}
+
+.u-combobox .u-input-inner {
+}
+
+.navbar {
+  background: var(--main-background);
+}
+.on-background {
+  color: var(--on-background);
+}
+
+.ng-touched.ng-invalid.form-control {
+  border: 2px solid red;
+}
+
+.div-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.u-combobox {
+  background: var(--secondary-background) !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.u-popup {
+  background: var(--secondary-background) !important;
+}
+
+.u-loader .u-loader-part {
+  border-color: var(--main-font-color) transparent transparent transparent !important;
+}
+.u-loader .u-loader-part:after {
+  background: var(--main-font-color) !important;
+}
+
+.loader {
+  border: 16px solid var(--main-background);
+  border-radius: 50%;
+  border-top: 16px solid #bd07c0;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

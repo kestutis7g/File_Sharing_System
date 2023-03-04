@@ -1,0 +1,229 @@
+<body app-theme>
+  <br />
+
+  <newPost *ngIf="signedIn && !loading" [showGroupSelect]="true"></newPost>
+
+  <br />
+
+  <div *ngIf="loading" style="position: absolute; left: 45%; top: 50%">
+    <utils-loader type="roller"></utils-loader>
+  </div>
+
+  <ul *ngIf="!loading" class="p-0">
+    <div class="container" *ngFor="let post of posts">
+      <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+          <div class="card main mb-3">
+            <div class="card-body">
+              <div>
+                <span class="secondary-text"
+                  >{{ post.user?.name }} posted in {{ post.group?.name }}
+                </span>
+
+                <div
+                  *ngIf="post.userId == userId"
+                  style="float: right; width: 30px; z-index: 100"
+                >
+                  <button
+                    class="dropdown btn"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                    data-bs-reference="parent"
+                  >
+                    <i
+                      class="fa-solid fa-ellipsis-vertical m-auto main-text"
+                    ></i>
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                    style="margin: 0px"
+                  >
+                    <div class="dropdown-item cursor-pointer">
+                      <div (click)="deletePost(post.id!)">
+                        <i class="fa-solid fa-trash">
+                          <span class="ps-2"> Delete post</span>
+                        </i>
+                      </div>
+                    </div>
+
+                    <div class="dropdown-item cursor-pointer">
+                      <div
+                        data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="selectPostToEdit(post.id!)"
+                      >
+                        <i class="fa-solid fa-pencil">
+                          <span class="ps-2">Edit post</span>
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="main-text">
+                {{ post.title }}
+              </h3>
+              <pre *ngIf="post.type != 'Photo'">{{ post.content }}</pre>
+              <img
+                class="input-group mb-3"
+                style="border-radius: 5px"
+                *ngIf="post.type != 'Text'"
+                [src]="post.picture"
+              />
+
+              <div>
+                <ul *ngFor="let comment of post.comments">
+                  <div *ngIf="comment.userId != userId">
+                    {{ comment.user?.name }}: {{ comment.content }}
+                  </div>
+                  <div *ngIf="comment.userId == userId">
+                    Me: {{ comment.content }}
+                    <i
+                      class="fa-solid fa-xmark"
+                      style="float: right"
+                      (click)="deleteComment(comment.id!)"
+                    ></i>
+                  </div>
+                  <hr />
+                </ul>
+              </div>
+
+              <div *ngIf="signedIn" class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="post.newComment"
+                  />
+                  <span
+                    class="input-group-text cursor-pointer"
+                    (click)="addComment(post.id!, post.newComment!)"
+                  >
+                    <i class="fa-solid fa-paper-plane"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ul>
+
+  <!-- MODAL -->
+  <div
+    class="modal fade"
+    id="editModal"
+    tabindex="-1"
+    aria-labelledby="editModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content main">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit post</h5>
+          <button
+            class="btn main"
+            style="width: 40px"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <i class="fa-solid fa-x main-text"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="col-form-label">Post title:</label>
+            <input
+              type="text"
+              class="form-control main-text"
+              [(ngModel)]="postEdit.title"
+            />
+          </div>
+          <div *ngIf="postEdit.type != 'Photo'" class="mb-3">
+            <label class="col-form-label">Content:</label>
+            <textarea
+              class="form-control"
+              style="height: 100px"
+              [(ngModel)]="postEdit.content"
+            ></textarea>
+          </div>
+          <div *ngIf="postEdit.type != 'Text'" class="mb-3">
+            <label class="col-form-label">Photo URL:</label>
+            <input class="form-control" [(ngModel)]="postEdit.picture" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn gradient-success"
+            data-bs-dismiss="modal"
+            (click)="editPost()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+  <!-- <ul class="p-0" *ngFor="let post of posts; index as i">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+          <div class="card main">
+            <div class="card-body">
+              <h3 class="main-text">
+                {{ post.title }}
+              </h3>
+              <pre>{{ post.content }}</pre>
+
+              <ul *ngFor="let comment of post.comments">
+                <div>
+                  {{ comment.content }}
+                </div>
+                <div *ngIf="comment.userId == userId">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </ul>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="post.newComment"
+                  />
+                  <span
+                    class="input-group-text"
+                    (click)="addComment(post.id!, post.newComment!)"
+                  >
+                    <i class="fa-solid fa-paper-plane"></i>
+                  </span>
+                </div>
+              </div>
+
+              <button
+                class="btn-primary btn btn-block gradient-danger"
+                (click)="deletePost(post.id!)"
+              >
+                Delete post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ul> -->
+
+  <br />
+  <br />
+  <br />
+</body>

@@ -1,0 +1,116 @@
+<div app-theme>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="card main">
+          <div class="card-body">
+            <form [formGroup]="postForm" class="mx-auto">
+              <div class="form-group mb-2">
+                <label class="main-text mb-5">Post title</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="title"
+                  />
+                </div>
+              </div>
+
+              <div *ngIf="postForm.value.type != 'Photo'" class="form-group">
+                <label class="main-text">Content</label>
+                <div class="input-group">
+                  <textarea
+                    class="form-control"
+                    formControlName="content"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div *ngIf="postForm.value.type != 'Text'" class="form-group">
+                <label class="main-text">Photo URL</label>
+                <div class="input-group">
+                  <input
+                    type="url"
+                    class="form-control"
+                    formControlName="picture"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="main-text">Post type</label>
+                <br />
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="inlineRadio1"
+                    value="Text"
+                    formControlName="type"
+                    checked
+                  />
+                  <label class="main-text" for="inlineRadio1">Text</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="inlineRadio2"
+                    value="Photo"
+                    formControlName="type"
+                  />
+                  <label class="main-text" for="inlineRadio2">Photo</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="inlineRadio3"
+                    value="PhotoWithText"
+                    formControlName="type"
+                  />
+                  <label class="main-text" for="inlineRadio3"
+                    >Photo with text
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group mb-4" *ngIf="showGroupSelect">
+                <label class="main-text">Group</label>
+                <div class="input-group">
+                  <!-- <utils-combobox
+                    class="w-100 form-control"
+                    style="color: var(--main-font-color)"
+                    [data]="groupList"
+                    textField="name"
+                    [clearButton]="true"
+                    placeholder="Group name"
+                    formControlName="group"
+                  ></utils-combobox> -->
+                  <utils-combobox
+                    class="w-100 form-control"
+                    style="color: var(--main-font-color)"
+                    [data]="groupListTemp.filterableData"
+                    textField="name"
+                    [filterable]="true"
+                    (filterChange)="groupListTemp.filter($event, 'name')"
+                    [clearButton]="true"
+                    placeholder="Group name"
+                    formControlName="group"
+                  ></utils-combobox>
+                </div>
+              </div>
+
+              <button
+                class="btn-primary btn btn-block gradient-primary"
+                (click)="addPost()"
+              >
+                Create new post
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

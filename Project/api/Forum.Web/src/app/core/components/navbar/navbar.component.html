@@ -1,0 +1,8 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+	<div class="container-fluid bg-white p-3 border-bottom">
+		<h5 class="m-0 text-white">Easter egg</h5>
+		<h6 *ngIf="isAuthorized" class="text-danger text-gradient cursor-pointer m-0" (click)="signOut()">
+			{{ 'label.signOut' | translate }}
+		</h6>
+	</div>
+</nav>

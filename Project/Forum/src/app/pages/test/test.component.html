@@ -1,0 +1,129 @@
+<body app-theme class="body">
+  <br />
+  <div>
+    <div>
+      <button type="button" class="btn gradient-default">Default</button>
+      <button type="button" class="btn gradient-primary">Primary</button>
+      <button type="button" class="btn gradient-secondary">Secondary</button>
+      <button type="button" class="btn gradient-info">Info</button>
+      <button type="button" class="btn gradient-success">Success</button>
+      <button type="button" class="btn gradient-danger">Danger</button>
+      <button type="button" class="btn gradient-warning">Warning</button>
+    </div>
+  </div>
+
+  <div class="loader"></div>
+
+  <utils-loader type="ripple"></utils-loader>
+  <utils-loader type="ellipsis"></utils-loader>
+  <utils-loader type="dual-ring"></utils-loader>
+  <utils-loader type="ring"></utils-loader>
+  <utils-loader type="roller"></utils-loader>
+  <utils-loader type="spinner"></utils-loader>
+  <br />
+
+  <input
+    type="file"
+    class="file-input"
+    enctype="multipart/form-data"
+    [accept]="requiredFileType"
+    (change)="onFileSelected($event)"
+    #fileUpload
+  />
+
+  <br />
+
+  <a
+    href="https://localhost:7111/api/file/downloadfile/4382BB39-B261-44A5-BD00-13A45E3D3E6F"
+  >
+    Download - database
+  </a>
+
+  <div>
+    <h1>GIF</h1>
+    <img
+      style="width: 500px"
+      src="https://localhost:7111/api/file/previewfile/AB295A1C-B1F3-41B7-B395-7FB1067AE38C"
+    />
+  </div>
+
+  <div>
+    <h1>Regular image</h1>
+    <img
+      style="width: 500px"
+      src="https://localhost:7111/api/file/previewfile/F4543FF4-7942-4A44-8762-FF9ACE7C1CAE"
+    />
+  </div>
+
+  <div>
+    <h1>No download image</h1>
+    <img
+      oncontextmenu="return false;"
+      style="width: 500px"
+      src="https://localhost:7111/api/file/previewfile/F4543FF4-7942-4A44-8762-FF9ACE7C1CAE"
+    />
+  </div>
+
+  <div class="video">
+    <video
+      muted
+      controls
+      controlsList="nodownload"
+      oncontextmenu="return false;"
+      style="width: 500px"
+    >
+      <source
+        src="https://localhost:7111/api/file/previewfile/8457B7D0-60E3-4626-A822-79E4498B4E5C"
+        type="video/mp4"
+      />
+      Browser not supported
+    </video>
+  </div>
+
+  <div class="video">
+    <video muted controls style="width: 500px">
+      <source
+        src="https://localhost:7111/api/file/previewfile/8457B7D0-60E3-4626-A822-79E4498B4E5C"
+        type="video/mp4"
+      />
+      Browser not supported
+    </video>
+  </div>
+
+  <div class="video">
+    <h1>Downloadable audio</h1>
+    <audio controls>
+      <source
+        src="https://localhost:7111/api/file/previewfile/739AFEFB-2263-4293-BF86-AB14D1C79152"
+        type="audio/mpeg"
+      />
+      Browser not supported
+    </audio>
+  </div>
+
+  <div class="video">
+    <h1>Prevent download audio</h1>
+
+    <audio controls controlsList="nodownload" oncontextmenu="return false;">
+      <source
+        src="https://localhost:7111/api/file/previewfile/739AFEFB-2263-4293-BF86-AB14D1C79152"
+        type="audio/mpeg"
+      />
+      Browser not supported
+    </audio>
+  </div>
+
+  <button
+    class="btn btn-success"
+    onclick=" window.open('https://localhost:7111/api/file/previewfile/AE07D6DE-FE5D-4528-B778-C451A9B642C2','_blank')"
+  >
+    Preview pdf
+  </button>
+
+  <button
+    class="btn btn-warning"
+    onclick=" window.open('https://localhost:7111/api/file/downloadfile/AE07D6DE-FE5D-4528-B778-C451A9B642C2','_blank')"
+  >
+    Download pdf
+  </button>
+</body>

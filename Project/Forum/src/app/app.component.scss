@@ -1,0 +1,26 @@
+.search-bar {
+  width: 200px;
+  display: relative;
+}
+.nav-item-mobile {
+  margin: 5px;
+}
+.nav-item {
+  margin: 5px;
+  width: 50px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-item:hover {
+  margin: 5px;
+  width: 50px;
+  height: 40px;
+  background: var(--body-background);
+  cursor: pointer;
+}
+
+.dropdown-menu.show {
+  margin-top: 5px !important;
+}

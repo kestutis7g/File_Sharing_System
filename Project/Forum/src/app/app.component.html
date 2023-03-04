@@ -1,0 +1,251 @@
+<nav app-theme class="navbar navbar-expand-md">
+  <a class="navbar-brand"></a>
+
+  <div class="navbar-toggler nav-item-mobile">
+    <div class="main-text" routerLink="/search/mygroups">
+      <i *ngIf="signedIn" class="fa-solid fa-user"
+        ><span> {{ userName }}</span></i
+      >
+      <i *ngIf="!signedIn" class="fa-solid fa-user"><span> Guest</span></i>
+    </div>
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarColor03"
+    aria-controls="navbarColor03"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <i class="fa-solid fa-burger main-text"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li *ngIf="isCollapsed" class="nav-item" style="width: auto">
+        <div class="main-text" routerLink="/search/mygroups">
+          <i *ngIf="signedIn" class="fa-solid fa-user"
+            ><span> {{ userName }}</span></i
+          >
+          <i *ngIf="!signedIn" class="fa-solid fa-user"><span> Guest</span></i>
+        </div>
+      </li>
+
+      <li *ngIf="isCollapsed" class="nav-item">
+        <div class="main-text" routerLink="/home">
+          <i class="fa-solid fa-house"></i>
+        </div>
+      </li>
+
+      <li *ngIf="!isCollapsed" class="nav-item-mobile">
+        <div class="main-text" routerLink="/home">
+          <i class="fa-solid fa-house"><span> Home</span></i>
+        </div>
+      </li>
+
+      <li class="main-text nav-item" *ngIf="isCollapsed">
+        <div class="dropdown">
+          <div
+            class="btn dropdown-toggle"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            data-bs-reference="parent"
+          >
+            <i class="fa-solid fa-gear main-text"></i>
+          </div>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuButton"
+            style="margin: 0px"
+          >
+            <div class="dropdown-item" *ngIf="!signedIn">
+              <li>
+                <div routerLink="/login">
+                  <i class="fa-solid fa-right-to-bracket">
+                    <span class="ps-2">Login</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" *ngIf="!signedIn">
+              <li>
+                <div routerLink="/register">
+                  <i class="fa-solid fa-user-plus">
+                    <span class="ps-2">Register</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" *ngIf="signedIn">
+              <li>
+                <div (click)="signOut()">
+                  <i class="fa-solid fa-right-from-bracket">
+                    <span class="ps-2">Sign out</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" *ngIf="signedIn">
+              <li>
+                <div routerLink="search/mygroups">
+                  <i class="fa-solid fa-users">
+                    <span class="ps-2">My groups</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" style="display: inline-block">
+              <span>
+                <i class="fa-solid fa-moon">
+                  <span class="ps-2">Dark mode</span>
+                </i>
+              </span>
+              <span class="form-check form-switch">
+                <input
+                  style="width: 40px"
+                  class="form-check-input gradient-"
+                  type="checkbox"
+                  id="flexSwitchCheckChecked"
+                  [(ngModel)]="darkTheme"
+                  (click)="toggleTheme()"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Mobile -->
+      <li class="main-text nav-item-mobile" *ngIf="!isCollapsed">
+        <div class="dropdown" style="max-height: 50px !important; z-index: 100">
+          <div
+            class="nav-item-mobile dropdown-toggle"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            data-bs-reference="parent"
+          >
+            <i class="fa-solid fa-gear main-text"> <span> Settings</span></i>
+          </div>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="dropdownMenuButton"
+            style="margin: 0px !important; padding: 5px"
+          >
+            <div class="dropdown-item" *ngIf="!signedIn">
+              <li>
+                <div routerLink="/login">
+                  <i class="fa-solid fa-right-to-bracket">
+                    <span class="ps-2">Login</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" *ngIf="!signedIn">
+              <li>
+                <div routerLink="/register">
+                  <i class="fa-solid fa-user-plus">
+                    <span class="ps-2">Register</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" *ngIf="signedIn">
+              <li>
+                <div (click)="signOut()">
+                  <i class="fa-solid fa-right-from-bracket">
+                    <span class="ps-2">Sign out</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" *ngIf="signedIn">
+              <li>
+                <div routerLink="search/mygroups">
+                  <i class="fa-solid fa-users">
+                    <span class="ps-2">My groups</span>
+                  </i>
+                </div>
+              </li>
+            </div>
+
+            <div class="dropdown-item" style="display: inline-block">
+              <span>
+                <i class="fa-solid fa-moon">
+                  <span class="ps-2">Dark mode</span>
+                </i>
+              </span>
+              <span class="form-check form-switch">
+                <input
+                  style="width: 40px"
+                  class="form-check-input gradient-"
+                  type="checkbox"
+                  id="flexSwitchCheckChecked"
+                  [(ngModel)]="darkTheme"
+                  (click)="toggleTheme()"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav" style="margin-left: auto">
+      <input
+        *ngIf="isCollapsed"
+        class="form-control search-bar"
+        type="text"
+        placeholder="Search"
+        style="display: inline-block"
+        [(ngModel)]="searchKeyword"
+      />
+      <input
+        *ngIf="!isCollapsed"
+        class="form-control search-bar mb-1"
+        type="text"
+        placeholder="Search"
+        style="width: auto"
+        [(ngModel)]="searchKeyword"
+      />
+
+      <button
+        *ngIf="isCollapsed"
+        class="btn gradient-default my-2 my-sm-0"
+        type="submit"
+        style="display: inline-block"
+        (click)="search()"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button
+        *ngIf="!isCollapsed"
+        class="btn gradient-default my-2 my-sm-0"
+        type="submit"
+        style="width: auto"
+        (click)="search()"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+<footer app-theme>
+  <div>Kęstutis Girnius IFF-9/6 2023</div>
+</footer>

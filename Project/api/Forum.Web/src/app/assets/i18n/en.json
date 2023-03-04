@@ -1,0 +1,102 @@
+{
+	"label": {
+		"phone": "Phone",
+		"site": "Site",
+		"comment": "Comment",
+		"uploadedAt": "Uploaded at",
+		"table": "Table",
+		"status": "Status",
+		"businessEntity_short": "BE",
+		"id": "ID",
+		"reference": "Reference",
+		"amount": "Amount",
+		"fullname": "Full name",
+		"code": "Code",
+		"IBAN": "IBAN",
+		"fileName": "File name",
+		"source": "Source",
+		"imported": "Imported",
+		"identified": "Identified",
+		"failed": "Failed",
+		"skipped": "Skipped",
+		"summary": "Summary",
+		"viewResults": "View results",
+		"uploadFiles": "Upload files",
+		"upload": "Upload",
+		"uploading": "Uploading",
+		"processing": "Processing",
+		"date": "Date",
+		"all": "All",
+		"deleteReason": "Delete reason",
+		"createdAt": "Created at",
+		"modifiedAt": "Modified at",
+		"dateFrom": "Date from",
+		"dateTo": "Date to",
+		"signIn": "Sign in",
+		"signOut": "Sign out",
+		"username": "Username",
+		"password": "Password"
+	},
+
+	"pager": {
+		"info": "Showing: %items% items of %total%",
+		"itemsPerPage": "Items per page: "
+	},
+
+	"parking": {
+		"status": {
+			"undefined": "",
+			"null": "",
+			"1": "Success",
+			"2": "Failed"
+		}
+	},
+
+	"payment": {
+		"status": {
+			"1": "Identified",
+			"2": "Warning",
+			"3": "Not Identified",
+			"4": "Exported",
+			"5": "Deleted"
+		},
+		"checkReference": "Check reference"
+	},
+
+	"action": {
+		"send": "Send",
+		"delete": "Delete",
+		"cancel": "Cancel",
+		"save": "Save",
+		"confirm": "Confirm",
+		"refresh": "Refresh",
+		"upload": "Upload",
+		"sendAll": "Send all",
+		"clear": "Clear"
+	},
+
+	"menu": {
+		"list": "List",
+		"parking": "Parking",
+		"audit": "Audit",
+		"payments": "Payments",
+		"import": "Import",
+		"settings": "Settings",
+		"schedules": "Schedules"
+	},
+
+	"alert": {
+		"success": "Success",
+		"info": "Info",
+		"error": "Error",
+		"notFound": "Not found",
+		"message": {
+			"inputRequired": "Input is required",
+			"delete": "Do you really want to delete?"
+		}
+	},
+
+	"error": {
+		"ERROR_INVALID_CREDENTIALS": "Incorrect username or password"
+	}
+}

@@ -1,0 +1,51 @@
+<body app-theme>
+  <div *ngIf="loading" style="position: absolute; left: 45%; top: 50%">
+    <utils-loader type="roller"></utils-loader>
+  </div>
+  <br />
+
+  <div *ngIf="!loading" class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="card main">
+          <div class="card-body">
+            <button
+              class="btn-primary btn btn-block gradient-primary"
+              routerLink="/new-group"
+            >
+              Create Group
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div *ngIf="!loading" class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="card main">
+          <div class="card-body">
+            <h3 class="main-text">Groups</h3>
+
+            <ul *ngFor="let group of groups">
+              <div
+                class="card form-control cursor-pointer"
+                [routerLink]="['/group', group.id]"
+                style="display: inline-block"
+              >
+                {{ group.name }}
+                <i
+                  *ngIf="group.visibility == 'Private'"
+                  class="fa-sharp fa-solid fa-eye-slash"
+                  style="width: 30px"
+                ></i>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
