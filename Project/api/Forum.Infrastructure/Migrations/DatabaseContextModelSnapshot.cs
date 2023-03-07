@@ -108,11 +108,17 @@ namespace Forum.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("UserId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Visibility")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("File", (string)null);
                 });
@@ -205,6 +211,43 @@ namespace Forum.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("GroupUser", (string)null);
+                });
+
+            modelBuilder.Entity("Forum.Core.Aggregates.Link.Entities.LinkEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset")
+                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+
+                    b.Property<DateTimeOffset?>("ExpiryDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("FileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ModifiedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset")
+                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+
+                    b.Property<bool>("OneTime")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("varbinary(Max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Link", (string)null);
                 });
 
             modelBuilder.Entity("Forum.Core.Aggregates.Post.Entities.PostEntity", b =>
@@ -322,18 +365,21 @@ namespace Forum.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(Max)");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(Max)");
 
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("varbinary(Max)");
 
                     b.HasKey("Id");
 
@@ -345,31 +391,33 @@ namespace Forum.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("848ad201-f0c1-421d-b439-6f4042f39322"),
+                            Id = new Guid("e407b476-cd29-427b-b498-eb01ffa216a8"),
                             Banned = false,
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2550), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(125), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             Email = "admin@admin.com",
                             Lastname = "Admin",
                             Login = "Admin",
-                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2560), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(143), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Admin",
-                            Password = "Admin",
-                            Role = "Admin"
+                            Password = "8s8MyiZeo4bd1uvG3V+s2plWJoCb9T8mbYttaqSPrvo=",
+                            Role = "Admin",
+                            Salt = new byte[] { 200, 36, 211, 3, 161, 23, 161, 179, 87, 195, 33, 54, 84, 55, 28, 98 }
                         },
                         new
                         {
-                            Id = new Guid("ab2143db-2cc4-4af6-9410-6666a642214e"),
+                            Id = new Guid("53a79ea2-4cb6-4536-96af-3bd536263a18"),
                             Banned = false,
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2669), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(216), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             Email = "sigitas@gmail.com",
                             Lastname = "Sigitavicius",
                             Login = "Sigitas",
-                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2670), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedAt = new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(217), new TimeSpan(0, 0, 0, 0, 0)),
                             Name = "Sigitas",
-                            Password = "Sigitas",
-                            Role = "User"
+                            Password = "GBiv54yeSIos8oswXxODHti7pCZMaf0WpsYNz25skoA=",
+                            Role = "User",
+                            Salt = new byte[] { 242, 255, 172, 76, 123, 74, 148, 61, 240, 117, 9, 69, 121, 40, 87, 213 }
                         });
                 });
 
@@ -394,6 +442,17 @@ namespace Forum.Infrastructure.Migrations
                     b.Navigation("ParentComment");
 
                     b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Forum.Core.Aggregates.File.Entities.FileEntity", b =>
+                {
+                    b.HasOne("Forum.Core.Aggregates.User.Entities.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

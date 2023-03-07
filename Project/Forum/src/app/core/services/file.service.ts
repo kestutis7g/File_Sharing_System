@@ -19,9 +19,26 @@ export class FileService {
     const headers = new HttpHeaders({
       'Content-Type': 'multipart/form-data',
     });
-    return this.http.post<any>(this.APIUrl + 'file/uploadfile', file, {
+    return this.http.post<any>(this.APIUrl + 'file', file, {
       reportProgress: true,
       observe: 'events',
     });
+  }
+
+  getFile(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'multipart/form-data',
+    });
+    return this.http.get<any>(this.APIUrl + 'file/' + id + '?action=download', {
+      responseType: 'blob' as 'json',
+    });
+  }
+
+  getUserFileList(id: String): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')!}`,
+    });
+    return this.http.get(this.APIUrl + 'file/user/' + id, { headers: headers });
   }
 }

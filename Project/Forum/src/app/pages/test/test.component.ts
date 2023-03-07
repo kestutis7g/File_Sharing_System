@@ -27,7 +27,18 @@ export class TestComponent implements OnInit {
 
   constructor(private http: HttpClient, private fileService: FileService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.fileService.getFile('5280A0FA-ED8D-4CED-ADE2-9E0FDDA69776').subscribe({
+    //   next: (data) => {
+    //     console.log(data);
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //   },
+    // });
+  }
+
+  kazkas: any;
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -41,7 +52,9 @@ export class TestComponent implements OnInit {
       formData.append('File', file);
 
       this.fileService.addFile(formData).subscribe({
-        next: (data) => {},
+        next: (data) => {
+          this.kazkas = data;
+        },
         error: (error) => {
           console.log(error);
         },

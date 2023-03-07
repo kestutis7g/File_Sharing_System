@@ -6,7 +6,6 @@ using Forum.Shared.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Forum.Core.Aggregates.File.Specs;
 using Microsoft.AspNetCore.Diagnostics;
-
 namespace Forum.Core.Services;
 
 public class FileService : IFileService
@@ -20,7 +19,23 @@ public class FileService : IFileService
 
     public async Task<ICollection<FileEntity>> GetFileList()
     {
-        return await FileRepo.ListAsync();
+        var list = await FileRepo.ListAsync();
+        foreach (var file in list)
+        {
+            file.FileBinary = null;
+        }
+        return list;
+    }
+
+    public async Task<ICollection<FileEntity>> GetUserFiles(Guid id)
+    {
+        var spec = new GetFilesByUserIdSpec(id);
+        var list = await FileRepo.ListAsync(spec);
+        foreach(var file in list)
+        {
+            file.FileBinary = null;
+        }
+        return list;
     }
 
     public async Task<FileEntity?> GetFileById(Guid id)

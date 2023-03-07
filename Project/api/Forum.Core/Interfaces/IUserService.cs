@@ -1,5 +1,6 @@
 ﻿using Forum.Core.Aggregates.User.Entities;
 
+
 namespace Forum.Core.Interfaces;
 
 public interface IUserService
@@ -9,6 +10,7 @@ public interface IUserService
     Task<UserEntity?> GetUserByLogin(string login);
     Task<UserEntity> CreateUser(UserEntity request);
     Task<UserEntity> UpdateUser(Guid id, UserEntity request);
+    Task<UserEntity> UpdateProfilePicture(Guid id, UserEntity request);
     Task DeleteUser(Guid id);
     Task HardDeleteUser(Guid id);
 }

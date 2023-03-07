@@ -10,22 +10,21 @@ namespace Forum.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "File",
+                name: "Link",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    Size = table.Column<int>(type: "int", nullable: false),
-                    FileMime = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    Visibility = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    FileBinary = table.Column<byte[]>(type: "varbinary(Max)", nullable: false),
+                    FileId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OneTime = table.Column<bool>(type: "bit", nullable: false),
+                    ExpiryDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Salt = table.Column<byte[]>(type: "varbinary(Max)", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSDATETIMEOFFSET()"),
                     ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSDATETIMEOFFSET()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_File", x => x.Id);
+                    table.PrimaryKey("PK_Link", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,13 +33,14 @@ namespace Forum.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     Login = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(Max)", maxLength: 32, nullable: false),
+                    Salt = table.Column<byte[]>(type: "varbinary(Max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     Lastname = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(Max)", nullable: true),
                     FileMime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
@@ -51,6 +51,32 @@ namespace Forum.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "File",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
+                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Size = table.Column<int>(type: "int", nullable: false),
+                    FileMime = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Visibility = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    FileBinary = table.Column<byte[]>(type: "varbinary(Max)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSDATETIMEOFFSET()"),
+                    ModifiedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValueSql: "SYSDATETIMEOFFSET()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_File", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_File_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -193,13 +219,13 @@ namespace Forum.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "Banned", "CreatedAt", "Deleted", "Description", "Email", "FileMime", "Lastname", "Login", "ModifiedAt", "Name", "Password", "Phone", "ProfilePicture", "Role" },
-                values: new object[] { new Guid("848ad201-f0c1-421d-b439-6f4042f39322"), false, new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2550), new TimeSpan(0, 0, 0, 0, 0)), false, null, "admin@admin.com", null, "Admin", "Admin", new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2560), new TimeSpan(0, 0, 0, 0, 0)), "Admin", "Admin", null, null, "Admin" });
+                columns: new[] { "Id", "Banned", "CreatedAt", "Deleted", "Description", "Email", "FileMime", "Lastname", "Login", "ModifiedAt", "Name", "Password", "Phone", "ProfilePicture", "Role", "Salt" },
+                values: new object[] { new Guid("53a79ea2-4cb6-4536-96af-3bd536263a18"), false, new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(216), new TimeSpan(0, 0, 0, 0, 0)), false, null, "sigitas@gmail.com", null, "Sigitavicius", "Sigitas", new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(217), new TimeSpan(0, 0, 0, 0, 0)), "Sigitas", "GBiv54yeSIos8oswXxODHti7pCZMaf0WpsYNz25skoA=", null, null, "User", new byte[] { 242, 255, 172, 76, 123, 74, 148, 61, 240, 117, 9, 69, 121, 40, 87, 213 } });
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "Banned", "CreatedAt", "Deleted", "Description", "Email", "FileMime", "Lastname", "Login", "ModifiedAt", "Name", "Password", "Phone", "ProfilePicture", "Role" },
-                values: new object[] { new Guid("ab2143db-2cc4-4af6-9410-6666a642214e"), false, new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2669), new TimeSpan(0, 0, 0, 0, 0)), false, null, "sigitas@gmail.com", null, "Sigitavicius", "Sigitas", new DateTimeOffset(new DateTime(2023, 3, 4, 15, 53, 11, 429, DateTimeKind.Unspecified).AddTicks(2670), new TimeSpan(0, 0, 0, 0, 0)), "Sigitas", "Sigitas", null, null, "User" });
+                columns: new[] { "Id", "Banned", "CreatedAt", "Deleted", "Description", "Email", "FileMime", "Lastname", "Login", "ModifiedAt", "Name", "Password", "Phone", "ProfilePicture", "Role", "Salt" },
+                values: new object[] { new Guid("e407b476-cd29-427b-b498-eb01ffa216a8"), false, new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(125), new TimeSpan(0, 0, 0, 0, 0)), false, null, "admin@admin.com", null, "Admin", "Admin", new DateTimeOffset(new DateTime(2023, 3, 7, 15, 52, 30, 886, DateTimeKind.Unspecified).AddTicks(143), new TimeSpan(0, 0, 0, 0, 0)), "Admin", "8s8MyiZeo4bd1uvG3V+s2plWJoCb9T8mbYttaqSPrvo=", null, null, "Admin", new byte[] { 200, 36, 211, 3, 161, 23, 161, 179, 87, 195, 33, 54, 84, 55, 28, 98 } });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_ParentId",
@@ -214,6 +240,11 @@ namespace Forum.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_UserId",
                 table: "Comment",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_File_UserId",
+                table: "File",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -256,6 +287,9 @@ namespace Forum.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "GroupUser");
+
+            migrationBuilder.DropTable(
+                name: "Link");
 
             migrationBuilder.DropTable(
                 name: "Post");

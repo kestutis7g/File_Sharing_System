@@ -9,6 +9,8 @@ using Forum.Core.Aggregates.Post.Entities;
 using Forum.Core.Aggregates.User.Entities;
 
 using Forum.Core.Aggregates.File.Entities;
+using Forum.Core.Aggregates.Link.Entities;
+
 using Forum.API.Models.File;
 
 namespace Forum.API;
@@ -26,6 +28,7 @@ public class AutoMapperProfiles : Profile
         CreateMap<UserEntity, UserModel>().ReverseMap();
 
         CreateMap<FileEntity, FileModel>().ReverseMap();
+        CreateMap<LinkEntity, LinkModel>().ReverseMap();
 
 
     }

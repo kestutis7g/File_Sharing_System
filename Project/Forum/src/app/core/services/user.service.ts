@@ -78,27 +78,30 @@ export class UserService {
       headers: headers,
     });
   }
-  updateAccount(user: User) {
+
+  updateProfilePicture(id: string, file: any) {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')!}`,
     });
-    return this.http.put(this.APIUrl + 'User/Account/' + user.id, user, {
-      headers: headers,
-    });
+    return this.http.put<any>(
+      this.APIUrl + 'user/' + id + '/profilePicture',
+      file,
+      {
+        headers: headers,
+        reportProgress: true,
+        observe: 'events',
+      }
+    );
   }
+
   updateAccountPassword(id: string, password: ChangePassword) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')!}`,
     });
-    return this.http.put(
-      this.APIUrl + 'User/Account/Password/' + id,
-      password,
-      {
-        headers: headers,
-      }
-    );
+    return this.http.put(this.APIUrl + 'User/Password/' + id, password, {
+      headers: headers,
+    });
   }
 
   deleteUser(id: string) {

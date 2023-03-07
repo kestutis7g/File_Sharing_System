@@ -35,7 +35,11 @@ public class FileEntityConfiguration : BaseEntityConfiguration<FileEntity>
             .IsRequired()
             .HasColumnType("varbinary(Max)");
 
-
+        builder.HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
     }
 }

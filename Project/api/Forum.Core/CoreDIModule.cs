@@ -39,5 +39,9 @@ public class CoreDIModule : Module
         builder.RegisterType<FileService>()
                .As<IFileService>()
                .InstancePerLifetimeScope();
+
+        builder.RegisterType<LinkService>()
+               .As<ILinkService>()
+               .InstancePerLifetimeScope();
     }
 }

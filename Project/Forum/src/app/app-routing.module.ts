@@ -10,11 +10,13 @@ import { SearchComponent } from './pages/search/search.component';
 import { NewGroupComponent } from './pages/newGroup/newGroup.component';
 import { GroupComponent } from './pages/group/group.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'search/:keyword', component: SearchComponent },
   { path: 'search/mygroups', component: SearchComponent },
   { path: 'new-group', component: NewGroupComponent },

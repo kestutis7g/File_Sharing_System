@@ -11,6 +11,7 @@ using NLog.Fluent;
 using Forum.API.Auth.Model;
 using System.Net;
 using System.Net.Http.Headers;
+using Forum.API.Models.File;
 
 namespace Forum.API.Controllers;
 
@@ -117,6 +118,45 @@ public class UserController : BaseController
            return StatusCode(500, ex.InnerException.Message);
        }
 
+    }
+
+    // POST api/file/upload
+    [HttpPut("{id:Guid}/profilePicture")]
+    [Authorize]
+    public async Task<ActionResult> UpdateProfilePicture([FromRoute] Guid id, IFormFile file)
+    {
+        if (file.ContentType.ToLower().StartsWith("image/"))
+        {
+            byte[] b;
+            using (BinaryReader br = new BinaryReader(file.OpenReadStream()))
+            {
+                b = br.ReadBytes((int)file.OpenReadStream().Length);
+            }
+
+            UserModel request = new UserModel();
+            request.FileMime = file.ContentType;
+            request.ProfilePicture = b;
+
+            await UserService.UpdateProfilePicture(id, Mapper.Map<UserEntity>(request));
+            return Ok();
+        }
+        return BadRequest("Bad file type - image file required");
+
+    }
+
+    // GET api/file/{id:Guid}
+    [HttpGet("{id:Guid}/profilePicture")]
+    public async Task<IActionResult> GetProfilePicture(Guid id)
+    {
+        var user = await UserService.GetUserById(id);
+
+        if (user is null || user.ProfilePicture is null || user.ProfilePicture.Length == 0)
+        {
+            return NotFound();
+        }
+        
+        return File(user.ProfilePicture, user.FileMime, enableRangeProcessing: true);
+        
     }
 
     // PUT api/user

@@ -6,7 +6,36 @@
       <div class="col-12 col-md-8 offset-md-2">
         <div class="card main">
           <div class="card-body">
-            <form [formGroup]="registerForm" class="mx-auto">
+            <div>
+              <img
+                style="object-fit: cover; width: 230px; height: 230px"
+                onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg'"
+                [src]="profilePicture"
+              />
+            </div>
+
+            <input
+              type="file"
+              class="file-input"
+              enctype="multipart/form-data"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              #fileUpload
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div *ngIf="user" class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="card main">
+          <div class="card-body">
+            <form [formGroup]="profileForm" class="mx-auto">
               <div class="form-group">
                 <label class="main-text">User name</label>
                 <div class="input-group">
@@ -123,9 +152,9 @@
 
               <button
                 class="btn-primary btn btn-block gradient-primary"
-                (click)="register()"
+                (click)="profile()"
               >
-                Register
+                Update profile
               </button>
             </form>
           </div>

@@ -3,6 +3,8 @@ using Forum.Core.Interfaces;
 using Forum.Shared.Interfaces;
 using Forum.Core.Aggregates.User.Specs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
 
 namespace Forum.Core.Services;
 
@@ -33,6 +35,18 @@ public class UserService : IUserService
 
     public async Task<UserEntity> CreateUser(UserEntity request)
     {
+        byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
+
+        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: request.Password!,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8));
+
+        request.Password = hashed;
+        request.Salt = salt;
+
         return await UserRepo.AddAsync(request);
     }
 
@@ -44,6 +58,19 @@ public class UserService : IUserService
             throw new ArgumentNullException(nameof(user));
         }
         user.Update(request);
+        await UserRepo.SaveChangesAsync();
+        return user;
+
+    }
+
+    public async Task<UserEntity> UpdateProfilePicture(Guid id, UserEntity request)
+    {
+        var user = await GetUserById(id);
+        if (user is null)
+        {
+            throw new ArgumentNullException(nameof(user));
+        }
+        user.UpdateProfilePicture(request);
         await UserRepo.SaveChangesAsync();
         return user;
 

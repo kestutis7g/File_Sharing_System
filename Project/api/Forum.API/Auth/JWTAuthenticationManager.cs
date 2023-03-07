@@ -1,6 +1,7 @@
 ﻿using Forum.API.Auth.Model;
 using Forum.Core.Aggregates.User.Entities;
 using Forum.Infrastructure;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,7 +14,14 @@ public class JWTAuthenticationManager
     
     public JWTResponse Authenticate(LoginRequestModel request, UserEntity user)
     {
-        if(request.Login != user.Login || request.Password != user.Password)
+        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: request.Password!,
+            salt: user.Salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8));
+
+        if (request.Login != user.Login || hashed != user.Password)
         {
             return null;
         }

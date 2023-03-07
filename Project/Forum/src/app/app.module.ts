@@ -34,6 +34,7 @@ import {
   UtilsLayoutModule,
   UtilsLoaderModule,
 } from 'angular-helper-utils';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ProfileComponent,
     SearchComponent,
     NewGroupComponent,
     GroupComponent,

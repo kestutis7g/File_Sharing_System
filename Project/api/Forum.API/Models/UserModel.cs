@@ -33,7 +33,7 @@ public class UserModel
     public string? Phone { get; set; }
 
 
-    public string? ProfilePicture { get; set; }
+    public byte[]? ProfilePicture { get; set; }
 
 
     [FileExtensions(ErrorMessage = "Must be valid file extention.")]
@@ -44,12 +44,12 @@ public class UserModel
     public string? Description { get; set; }
 
 
-    [Range(typeof(DateTimeOffset), "1950-01-01T00:00:00+00:00", "2200-01-01T00:00:00+00:00", ErrorMessage = "Must be valid date between 1950 and 2200.")]
-    public DateTimeOffset? CreatedAt { get; set; }
+    //[Range(typeof(DateTimeOffset), "1950-01-01T00:00:00+00:00", "2200-01-01T00:00:00+00:00", ErrorMessage = "Must be valid date between 1950 and 2200.")]
+    //public DateTimeOffset? CreatedAt { get; set; }
 
 
-    [Range(typeof(DateTimeOffset), "1950-01-01T00:00:00+00:00", "2200-01-01T00:00:00+00:00", ErrorMessage = "Must be valid date between 1950 and 2200.")]
-    public DateTimeOffset? ModifiedAt { get; set; }
+    //[Range(typeof(DateTimeOffset), "1950-01-01T00:00:00+00:00", "2200-01-01T00:00:00+00:00", ErrorMessage = "Must be valid date between 1950 and 2200.")]
+    //public DateTimeOffset? ModifiedAt { get; set; }
 
 
     [Range(typeof(bool), "false", "true", ErrorMessage = "Must be valid boolean.")]
