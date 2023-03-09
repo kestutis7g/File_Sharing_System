@@ -90,3 +90,17 @@ export type FileType = {
   visibility: string;
   file: any;
 };
+
+export type FileInfo = {
+  id: string;
+  userId: string;
+  name: string;
+  size: number;
+  fileMime: string;
+  location: string;
+  visibility: string;
+  createdAt: string;
+  modifiedAt: string;
+  icon: string;
+  canOpen: boolean;
+};

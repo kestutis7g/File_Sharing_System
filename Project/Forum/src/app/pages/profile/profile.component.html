@@ -7,21 +7,149 @@
         <div class="card main">
           <div class="card-body">
             <div>
-              <img
-                style="object-fit: cover; width: 230px; height: 230px"
-                onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg'"
-                [src]="profilePicture"
-              />
+              <div style="display: inline-block">
+                <img
+                  style="object-fit: cover; width: 230px; height: 230px"
+                  onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg'"
+                  [src]="profilePicture"
+                />
+              </div>
+
+              <div
+                style="
+                  display: inline-block;
+                  width: 400px;
+                  height: 230px;
+                  vertical-align: top;
+                  padding: 10px;
+                "
+              >
+                <div>{{ user.name }} {{ user.lastname }}</div>
+                <hr />
+                <div>
+                  <i class="fa fa-envelope m-1"></i>
+                  {{ user.email }}
+                </div>
+                <div>
+                  <i class="fa-solid fa-phone m-1"></i>
+                  {{ user.phone }}
+                  {{ user.phone ? user.phone : "---" }}
+                </div>
+
+                <hr />
+                <div *ngIf="user.description != null">
+                  <div [innerHTML]="user.description"></div>
+                </div>
+              </div>
             </div>
 
             <input
               type="file"
               class="file-input"
+              style="display: none"
               enctype="multipart/form-data"
               accept="image/*"
               (change)="onFileSelected($event)"
               #fileUpload
             />
+
+            <button (click)="fileUpload.click()" style="border-radius: 5px">
+              <i class="fa-solid fa-image"></i>
+              Profile picture
+            </button>
+
+            <button style="border-radius: 5px">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              Upload file
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div *ngIf="user" class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="card main">
+          <div class="card-body">
+            <div>
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Sort by
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <a class="dropdown-item" (click)="sortFiles('nameUp')"
+                      >Name ▲</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="sortFiles('nameDown')"
+                      >Name ▼</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="sortFiles('sizeUp')"
+                      >Size ▲</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="sortFiles('sizeDown')"
+                      >Size ▼</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="sortFiles('typeUp')"
+                      >Type ▲</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="sortFiles('typeDown')"
+                      >Type ▼</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <hr />
+              <ul *ngFor="let file of files">
+                <div>
+                  <div style="display: inline-block; width: 600px">
+                    <i style="margin: 5px" [class]="file.icon"></i>
+                    {{ file.name }}
+                    <p
+                      style="display: inline-block; margin: 0px 10px"
+                      class="secondary-text"
+                    >
+                      {{ file.size }} bytes
+                    </p>
+                  </div>
+
+                  <div
+                    style="width: 35px; height: 24px; float: right"
+                    (click)="downloadFile(file.id)"
+                  >
+                    <i class="fa-solid fa-cloud-arrow-down fa-xl"></i>
+                  </div>
+                  <div
+                    *ngIf="file.canOpen"
+                    style="width: 35px; height: 24px; float: right"
+                    (click)="previewFile(file.id)"
+                  >
+                    <i class="fa-solid fa-folder-open fa-xl"></i>
+                  </div>
+                </div>
+                <hr />
+              </ul>
+            </div>
           </div>
         </div>
       </div>
